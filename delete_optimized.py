@@ -1,7 +1,6 @@
 import xlwings as xw
 import pandas as pd
 import time
-import unicodedata
 
 # ---------------- Configuration ----------------
 file_path = r"D:\Downloads\2025 10Oct List of Transaction detailed per Sources.xlsb"
@@ -26,6 +25,14 @@ try:
 
     last_row = ws.range(f"{column_letter}{ws.cells.last_cell.row}").end('up').row
 
+    # Nothing to process if the column is empty below start_row
+    if last_row < start_row:
+        print("No data rows found; nothing to delete.")
+        wb.save()
+        wb.close()
+        wb = None
+        raise SystemExit
+
     col_values = ws.range(f"{column_letter}{start_row}:{column_letter}{last_row}").value
     df = pd.DataFrame({column_letter: col_values})
 
@@ -44,7 +51,6 @@ try:
     print(f"Total rows to delete: {len(rows_to_delete)}")
 
     if rows_to_delete:
-        rows_to_delete.sort()
         ranges = []
         start = prev = rows_to_delete[0]
         for r in rows_to_delete[1:]:
