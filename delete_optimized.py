@@ -3,8 +3,13 @@ import pandas as pd
 import time
 
 # ---------------- Configuration ----------------
+
+# Change to your file path
 file_path = r"D:\Downloads\2025 10Oct List of Transaction detailed per Sources.xlsb"
+
+# Change to your sheet name
 sheet_name = "DN100-DVR128_OCT2025"
+
 start_row = 14        # first row of the actual data
 column_letter = 'I'   # column to filter
 # ------------------------------------------------
