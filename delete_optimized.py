@@ -25,7 +25,6 @@ try:
 
     last_row = ws.range(f"{column_letter}{ws.cells.last_cell.row}").end('up').row
 
-    # Nothing to process if the column is empty below start_row
     if last_row < start_row:
         print("No data rows found; nothing to delete.")
         wb.save()
